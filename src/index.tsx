@@ -1,5 +1,3 @@
-import PinataUiReactNative from './NativePinataUiReactNative';
-
-export function multiply(a: number, b: number): number {
-  return PinataUiReactNative.multiply(a, b);
-}
+export * from './components/BasePinataWebView';
+export * from './components/Rewards/PinataRewardsFlow';
+export * from './components/Points/PinataPointsFlow';
