@@ -1,6 +1,6 @@
 import BasePinataWebView from '../BasePinataWebView';
 
-export const PinataPointsFlow = ({ token }: { token: string }) => {
+export const PinataPointsWallet = ({ token }: { token: string }) => {
   return (
     <BasePinataWebView
       getHtml={() => `
