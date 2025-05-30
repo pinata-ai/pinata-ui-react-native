@@ -1,6 +1,6 @@
 {
   "name": "pinata-ui-react-native",
-  "version": "0.4.0",
+  "version": "0.5.1",
   "description": "An example of using https://github.com/pinata-ai/pinata-ui in React-Native application.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
@@ -176,7 +176,6 @@
     "version": "0.50.3"
   },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "^2.1.2",
     "react-native-webview": "^13.13.5"
   }
 }
