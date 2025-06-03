@@ -1,6 +1,6 @@
 {
   "name": "pinata-ui-react-native",
-  "version": "0.5.3",
+  "version": "0.5.6",
   "description": "An example of using https://github.com/pinata-ai/pinata-ui in React-Native application.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
@@ -38,7 +38,7 @@
     "typecheck": "tsc",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib",
-    "prepare": "husky",
+    "prepare": "husky && bob build",
     "release": "release-it --only-version"
   },
   "keywords": [

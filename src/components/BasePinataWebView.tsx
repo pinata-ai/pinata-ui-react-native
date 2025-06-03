@@ -7,6 +7,8 @@ interface BasePinataWebViewProps {
   style?: ViewStyle;
   onMessage?: (event: WebViewMessageEvent) => void;
   onError?: (event: WebViewErrorEvent) => void;
+  onClick?: () => void;
+  name?: string;
 }
 
 export const BasePinataWebView = ({
@@ -14,6 +16,8 @@ export const BasePinataWebView = ({
   style,
   onMessage,
   onError,
+  onClick,
+  name,
 }: BasePinataWebViewProps) => {
   const baseHtml = `
         <!DOCTYPE html>
@@ -31,8 +35,34 @@ export const BasePinataWebView = ({
     </head>
      <body>
        ${getHtml()}
+       <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const target = document.querySelector(${JSON.stringify(name)});
+          if (target) {
+            target.addEventListener('click', function() {
+              window.ReactNativeWebView.postMessage(
+                JSON.stringify({ type: 'genericClick' }),
+              );
+            });
+          }
+        });
+      </script>
     </html>
     `;
+
+  const handleMessage = (event: WebViewMessageEvent) => {
+    let parsed: { type?: string } = {};
+    try {
+      parsed = JSON.parse(event.nativeEvent.data);
+    } catch {}
+
+    if (parsed.type === 'genericClick') {
+      onClick?.();
+    }
+
+    onMessage?.(event);
+  };
+
   return (
     <WebView
       originWhitelist={['*']}
@@ -44,7 +74,7 @@ export const BasePinataWebView = ({
       allowFileAccessFromFileURLs
       allowUniversalAccessFromFileURLs
       mixedContentMode="always"
-      onMessage={onMessage}
+      onMessage={handleMessage}
       onError={onError}
     />
   );

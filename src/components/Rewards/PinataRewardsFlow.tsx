@@ -9,4 +9,3 @@ export const PinataRewardsFlow = ({ token }: { token: string }) => {
     />
   );
 };
-``;
