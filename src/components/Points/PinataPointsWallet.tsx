@@ -16,7 +16,7 @@ export const PinataPointsWallet = ({
       onClick={onClick}
       name="pinata-points-wallet"
       getHtml={() => `
-                <pinata-points-wallet usertoken="${token}" customCTAText=${text || 'See rewards'}></pinata-points-wallet>
+                <pinata-points-wallet usertoken="${token}" customCTAText='${text || 'See rewards'}'></pinata-points-wallet>
             `}
     />
   );
