@@ -1,18 +1,17 @@
-#import "PinataUiReactNative.h"
+#import <React/RCTBridgeModule.h>
+
+@interface PinataUiReactNative : NSObject <RCTBridgeModule>
+@end
 
 @implementation PinataUiReactNative
-RCT_EXPORT_MODULE()
 
-- (NSNumber *)multiply:(double)a b:(double)b {
-    NSNumber *result = @(a * b);
+RCT_EXPORT_MODULE();
 
-    return result;
-}
-
-- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
-    (const facebook::react::ObjCTurboModule::InitParams &)params
+RCT_EXPORT_METHOD(show:(NSString *)message
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-    return std::make_shared<facebook::react::NativePinataUiReactNativeSpecJSI>(params);
+  resolve(nil);
 }
 
 @end
