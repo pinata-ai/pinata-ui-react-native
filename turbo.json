@@ -18,7 +18,7 @@
       "outputs": []
     },
     "build:ios": {
-      "env": ["RCT_NEW_ARCH_ENABLED=0"],
+      "env": ["RCT_NEW_ARCH_ENABLED"],
       "inputs": [
         "package.json",
         "*.podspec",
