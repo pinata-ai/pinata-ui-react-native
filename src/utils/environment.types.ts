@@ -12,8 +12,6 @@ export const ENVIRONMENT_SUFFIX = {
 
 export type Environment = (typeof ENVIRONMENTS)[keyof typeof ENVIRONMENTS];
 
-type EnvironmentProp = { environment?: Environment };
-
 export type PropsWithEnvironment<T = undefined> = T extends undefined
-  ? EnvironmentProp
-  : EnvironmentProp & T;
+  ? { environment?: Environment }
+  : { environment?: Environment } & T;

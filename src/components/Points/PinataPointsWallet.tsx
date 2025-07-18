@@ -11,7 +11,7 @@ export const PinataPointsWallet = ({
   token,
   onClick,
   text,
-  environment,
+  environment = undefined,
 }: PropsWithEnvironment<PinataPointsWalletProps>) => {
   return (
     <BasePinataWebView
