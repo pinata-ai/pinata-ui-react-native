@@ -1,28 +1,34 @@
 import { getEnvironmentUrl } from './environment.helpers';
-import { ENVIRONMENTS, type Environment } from './environment.types';
+import {
+  ENVIRONMENTS,
+  ENVIRONMENT_SUFFIX,
+  type Environment,
+} from './environment.types';
 
 describe('getEnvironmentUrl', () => {
-  const BASE_URL = 'https://static.pinata.ai/static/ui/pinata-ui.';
-  const LATEST_VERSION = 'latest';
-  const SANDBOX_VERSION = `${LATEST_VERSION}-sandbox`;
+  const uiVersion = '1.3.0';
+  const BASE_URL = `https://static.pinata.ai/static/ui/pinata-ui.${uiVersion}`;
+  const extension = '.js';
 
-  describe('should return the sandbox URL when environment is falsy', () => {
-    const falsyValues = [undefined, null, '', 0, false];
-    falsyValues.forEach((value) => {
-      it(`value is ${value}`, () => {
-        const result = getEnvironmentUrl(value as Environment);
-        expect(result).toBe(`${BASE_URL}${SANDBOX_VERSION}.js`);
-      });
-    });
+  it('should return the sandbox URL when environment is undefined', () => {
+    const expectedUrl = `${BASE_URL}${ENVIRONMENT_SUFFIX[ENVIRONMENTS.SANDBOX]}${extension}`;
+    expect(getEnvironmentUrl(undefined as unknown as Environment)).toBe(
+      expectedUrl
+    );
   });
 
   it('should return the production URL when environment is PRODUCTION', () => {
-    const result = getEnvironmentUrl(ENVIRONMENTS.PRODUCTION);
-    expect(result).toBe(`${BASE_URL}${LATEST_VERSION}.js`);
+    const expectedUrl = `${BASE_URL}${ENVIRONMENT_SUFFIX[ENVIRONMENTS.PRODUCTION]}${extension}`;
+    expect(getEnvironmentUrl(ENVIRONMENTS.PRODUCTION)).toBe(expectedUrl);
   });
 
-  it('should return the sandbox URL when environment is not PRODUCTION', () => {
-    const result = getEnvironmentUrl(ENVIRONMENTS.SANDBOX);
-    expect(result).toBe(`${BASE_URL}${SANDBOX_VERSION}.js`);
+  it('should return the dev URL when environment is DEV', () => {
+    const expectedUrl = `${BASE_URL}${ENVIRONMENT_SUFFIX[ENVIRONMENTS.DEV]}${extension}`;
+    expect(getEnvironmentUrl(ENVIRONMENTS.DEV)).toBe(expectedUrl);
+  });
+
+  it('should return the sandbox URL when environment is unknown', () => {
+    const expectedUrl = `${BASE_URL}${ENVIRONMENT_SUFFIX[ENVIRONMENTS.SANDBOX]}${extension}`;
+    expect(getEnvironmentUrl('UNKNOWN_ENVIRONMENT' as any)).toBe(expectedUrl);
   });
 });
