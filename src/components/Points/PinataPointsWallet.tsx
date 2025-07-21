@@ -1,3 +1,4 @@
+import type { PropsWithEnvironment } from '../../utils/environment.types';
 import BasePinataWebView from '../BasePinataWebView';
 
 interface PinataPointsWalletProps {
@@ -10,7 +11,8 @@ export const PinataPointsWallet = ({
   token,
   onClick,
   text,
-}: PinataPointsWalletProps) => {
+  environment = undefined,
+}: PropsWithEnvironment<PinataPointsWalletProps>) => {
   return (
     <BasePinataWebView
       onClick={onClick}
@@ -18,6 +20,7 @@ export const PinataPointsWallet = ({
       getHtml={() => `
                 <pinata-points-wallet usertoken="${token}" customCTAText='${text || 'See rewards'}'></pinata-points-wallet>
             `}
+      environment={environment}
     />
   );
 };

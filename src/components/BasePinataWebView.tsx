@@ -1,6 +1,11 @@
 import { StyleSheet, type ViewStyle } from 'react-native';
 import WebView, { type WebViewMessageEvent } from 'react-native-webview';
 import { type WebViewErrorEvent } from 'react-native-webview/lib/WebViewTypes';
+import { getEnvironmentUrl } from '../utils/environment.helpers';
+import {
+  ENVIRONMENTS,
+  type PropsWithEnvironment,
+} from '../utils/environment.types';
 
 interface BasePinataWebViewProps {
   getHtml: () => string;
@@ -18,7 +23,9 @@ export const BasePinataWebView = ({
   onError,
   onClick,
   name,
-}: BasePinataWebViewProps) => {
+  environment = ENVIRONMENTS.PRODUCTION,
+}: PropsWithEnvironment<BasePinataWebViewProps>) => {
+  const environmentUrl = getEnvironmentUrl(environment);
   const baseHtml = `
         <!DOCTYPE html>
         <html lang="en">
@@ -30,8 +37,8 @@ export const BasePinataWebView = ({
                  maximum-scale=1,
                  user-scalable=no"
       />
-      <link  rel="preconnect" href="https://static.pinata.ai/static/ui/pinata-ui.1.3.0-sandbox.js" />
-      <script type="module" src="https://static.pinata.ai/static/ui/pinata-ui.1.3.0-sandbox.js"></script>
+      <link  rel="preconnect" href="${environmentUrl}" />
+      <script type="module" src="${environmentUrl}"></script>
     </head>
      <body>
        ${getHtml()}
