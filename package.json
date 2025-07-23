@@ -1,6 +1,6 @@
 {
   "name": "pinata-ui-react-native",
-  "version": "0.5.14",
+  "version": "0.5.15",
   "description": "An example of using https://github.com/pinata-ai/pinata-ui in React-Native application.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
