@@ -14,17 +14,25 @@ This project is a React Native SDK designed to simplify the integration of Piña
 
 
 ## Installation
+First, install the SDK and its WebView dependency:
 
 ```bash
-  npm install pinata-ui-react-native
+  npm install pinata-ui-react-native react-native-webview@13.13.5
 ```
+or with yarn:
+
+```bash 
+ yarn add pinata-ui-react-native react-native-webview@13.13.5
+```
+
+> **Note:** This package requires react-native-webview version 13.13.5 to render the Piñata UI components correctly.
 
 ## Usage/Examples
 
 ```javascript
-import { PinataRewardsFlow } from 'pinata-ui-react-native';
+import { PinataPointsFlow } from 'pinata-ui-react-native';
 
-<PinataRewardsFlow token="YOUR_USER_TOKEN" />
+<PinataPointsFlow token="YOUR_USER_TOKEN" />
 ```
 
 
