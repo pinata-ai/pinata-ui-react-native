@@ -1,6 +1,6 @@
 {
   "name": "pinata-ui-react-native",
-  "version": "0.5.18",
+  "version": "0.5.19",
   "description": "An example of using https://github.com/pinata-ai/pinata-ui in React-Native application.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
@@ -94,7 +94,8 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-webview": "*"
   },
   "workspaces": [
     "example"
@@ -178,7 +179,5 @@
   "dependencies": {
     "react-native-webview": "^13.13.5"
   },
-  "bundleDependencies": [
-    "react-native-webview"
-  ]
+  "bundleDependencies": []
 }
