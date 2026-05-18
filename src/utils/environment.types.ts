@@ -1,3 +1,5 @@
+import type { ViewStyle } from 'react-native';
+
 export const ENVIRONMENTS = {
   PRODUCTION: 'production',
   SANDBOX: 'sandbox',
@@ -29,5 +31,9 @@ export const ENVIRONMENT_SUFFIX = {
 export type Environment = (typeof ENVIRONMENTS)[keyof typeof ENVIRONMENTS];
 
 export type PropsWithEnvironment<T = undefined> = T extends undefined
-  ? { environment?: Environment }
-  : { environment?: Environment } & T;
+  ? { environment?: Environment; style?: ViewStyle; containerStyle?: ViewStyle }
+  : {
+      environment?: Environment;
+      style?: ViewStyle;
+      containerStyle?: ViewStyle;
+    } & T;
