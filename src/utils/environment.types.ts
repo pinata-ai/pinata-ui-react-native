@@ -31,5 +31,9 @@ export const ENVIRONMENT_SUFFIX = {
 export type Environment = (typeof ENVIRONMENTS)[keyof typeof ENVIRONMENTS];
 
 export type PropsWithEnvironment<T = undefined> = T extends undefined
-  ? { environment?: Environment; style?: ViewStyle }
-  : { environment?: Environment; style?: ViewStyle } & T;
+  ? { environment?: Environment; style?: ViewStyle; containerStyle?: ViewStyle }
+  : {
+      environment?: Environment;
+      style?: ViewStyle;
+      containerStyle?: ViewStyle;
+    } & T;

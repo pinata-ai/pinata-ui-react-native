@@ -9,6 +9,7 @@ export const PinataRewardsFlow = ({
   token,
   environment = undefined,
   style,
+  containerStyle,
 }: PropsWithEnvironment<{ token: string }>) => {
   return (
     <BasePinataWebView
@@ -19,6 +20,7 @@ export const PinataRewardsFlow = ({
       }
       environment={environment}
       style={style}
+      containerStyle={containerStyle}
     />
   );
 };

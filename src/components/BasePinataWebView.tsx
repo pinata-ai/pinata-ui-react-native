@@ -115,9 +115,13 @@ export const BasePinataWebView = ({
 const styles = StyleSheet.create({
   webview: {
     flex: 1,
+    height: '100%',
+    width: '100%',
   },
   container: {
     flex: 1,
+    height: '100%',
+    width: '100%',
   },
 });
 
