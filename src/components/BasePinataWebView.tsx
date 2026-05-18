@@ -16,6 +16,7 @@ interface BasePinataWebViewProps {
   onClick?: () => void;
   name?: string;
   containerStyles?: ViewStyle;
+  injectedJavaScript?: string;
 }
 
 export const BasePinataWebView = ({
@@ -27,6 +28,7 @@ export const BasePinataWebView = ({
   name,
   containerStyles,
   environment = ENVIRONMENTS.PRODUCTION,
+  injectedJavaScript = '',
 }: PropsWithEnvironment<BasePinataWebViewProps>) => {
   const [webViewHeight, setWebViewHeight] = useState(0);
   const environmentUrl = getEnvironmentUrl(environment);
@@ -52,13 +54,13 @@ export const BasePinataWebView = ({
       </style>
     </head>
      <body>
-       <div style="width: 100%; display: flex; flex-direction: column;">
+       <div style="width: 100%; display: flex; flex-direction: column;" id="root">
         ${getHtml()}
        </div>
        <script>
         (function() {
           function reportHeight() {
-            var h = document.documentElement.scrollHeight;
+            var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
             window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'contentHeight', height: h }));
           }
 
@@ -117,6 +119,7 @@ export const BasePinataWebView = ({
         scrollEnabled={false}
         onMessage={handleMessage}
         onError={onError}
+        injectedJavaScript={injectedJavaScript}
       />
     </View>
   );
