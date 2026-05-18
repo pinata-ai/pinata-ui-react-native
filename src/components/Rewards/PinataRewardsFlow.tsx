@@ -13,7 +13,7 @@ export const PinataRewardsFlow = ({
   return (
     <BasePinataWebView
       getHtml={() =>
-        `<div style="width: 100%; height: 500px; display: flex; flex-direction: column;">
+        `<div style="width: 100%; min-height: 500px; display: flex; flex-direction: column;">
           <pinata-reward-flow usertoken="${token}" environment="${EMBEDED_COMPONENTS_ENVIRONMENTS_MAP[environment ?? ENVIRONMENTS.SANDBOX]}"/>
         </div>`
       }

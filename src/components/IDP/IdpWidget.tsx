@@ -17,9 +17,9 @@ export const PinataIdpWidget = ({
   return (
     <BasePinataWebView
       name="pinata-idp-widget"
-      getHtml={() => `
-                <pinata-idp-widget usertoken="${token}" environment="${EMBEDED_COMPONENTS_ENVIRONMENTS_MAP[environment ?? ENVIRONMENTS.SANDBOX]}"></pinata-idp-widget>
-            `}
+      getHtml={() => `<div style="width: 100%; min-height: 500px; display: flex; flex-direction: column;">
+          <pinata-idp-widget usertoken="${token}" environment="${EMBEDED_COMPONENTS_ENVIRONMENTS_MAP[environment ?? ENVIRONMENTS.SANDBOX]}"></pinata-idp-widget>
+        </div>`}
       environment={environment}
       style={style}
     />
