@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { StyleSheet, View, type ViewStyle } from 'react-native';
+import { StyleSheet, type ViewStyle } from 'react-native';
 import WebView, { type WebViewMessageEvent } from 'react-native-webview';
 import { type WebViewErrorEvent } from 'react-native-webview/lib/WebViewTypes';
 import { getEnvironmentUrl } from '../utils/environment.helpers';
@@ -15,8 +14,7 @@ interface BasePinataWebViewProps {
   onError?: (event: WebViewErrorEvent) => void;
   onClick?: () => void;
   name?: string;
-  containerStyles?: ViewStyle;
-  injectedJavaScript?: string;
+  containerStyle?: ViewStyle;
 }
 
 export const BasePinataWebView = ({
@@ -26,35 +24,30 @@ export const BasePinataWebView = ({
   onError,
   onClick,
   name,
-  containerStyles,
   environment = ENVIRONMENTS.PRODUCTION,
-  injectedJavaScript = '',
+  containerStyle,
 }: PropsWithEnvironment<BasePinataWebViewProps>) => {
-  const [webViewHeight, setWebViewHeight] = useState(0);
   const environmentUrl = getEnvironmentUrl(environment);
   const baseHtml = `
         <!DOCTYPE html>
         <html lang="en">
         <head>
-          <meta
-        name="viewport"
-        content="width=device-width,
-                 initial-scale=1,
-                 maximum-scale=1,
-                 user-scalable=no"
-      />
-      <link  rel="preconnect" href="${environmentUrl}" />
-      <script type="module" src="${environmentUrl}"></script>
-      <style>
-        body, html {
-          margin: 0;
-          padding: 0;
-          width: 100%;
-        }
-      </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link  rel="preconnect" href="${environmentUrl}" />
+        <script type="module" src="${environmentUrl}"></script>
+        <style>
+          body, html, #webviewRoot {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+          }
+        </style>
     </head>
      <body>
-       <div style="width: 100%; display: flex; flex-direction: column;" id="root">
+       <div id="webviewRoot">
         ${getHtml()}
        </div>
        <script>
@@ -97,36 +90,33 @@ export const BasePinataWebView = ({
       onClick?.();
     }
 
-    if (parsed.type === 'contentHeight' && typeof parsed.height === 'number') {
-      setWebViewHeight(parsed.height);
-    }
-
     onMessage?.(event);
   };
 
   return (
-    <View style={[{ height: webViewHeight }, containerStyles]}>
-      <WebView
-        originWhitelist={['*']}
-        source={{ html: baseHtml }}
-        style={[styles.webview, style]}
-        javaScriptEnabled
-        domStorageEnabled
-        allowFileAccess
-        allowFileAccessFromFileURLs
-        allowUniversalAccessFromFileURLs
-        mixedContentMode="always"
-        scrollEnabled={false}
-        onMessage={handleMessage}
-        onError={onError}
-        injectedJavaScript={injectedJavaScript}
-      />
-    </View>
+    <WebView
+      originWhitelist={['*']}
+      source={{ html: baseHtml }}
+      style={[styles.webview, style]}
+      containerStyle={[styles.container, containerStyle]}
+      javaScriptEnabled
+      domStorageEnabled
+      allowFileAccess
+      allowFileAccessFromFileURLs
+      allowUniversalAccessFromFileURLs
+      mixedContentMode="always"
+      scrollEnabled={false}
+      onMessage={handleMessage}
+      onError={onError}
+    />
   );
 };
 
 const styles = StyleSheet.create({
   webview: {
+    flex: 1,
+  },
+  container: {
     flex: 1,
   },
 });

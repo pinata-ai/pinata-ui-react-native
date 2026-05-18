@@ -5,31 +5,6 @@ import {
 } from '../../utils/environment.types';
 import BasePinataWebView from '../BasePinataWebView';
 
-const injectedJavaScript = `(function() {
-  function reportHeight2() {
-    console.log('reportHeight2 height');
-    const rootElement = document.getElementById('root');
-    console.log({
-      rootElement,
-      clientHeight: rootElement ? rootElement.clientHeight : null,
-      scrollHeight: rootElement ? rootElement.scrollHeight : null,
-      offsetHeight: rootElement ? rootElement.offsetHeight : null,
-      windowInnerHeight: window.innerHeight,
-      documentElementClientHeight: document.documentElement.clientHeight,
-      documentElementScrollHeight: document.documentElement.scrollHeight,
-      documentElementOffsetHeight: document.documentElement.offsetHeight,
-      bodyClientHeight: document.body.clientHeight,
-      bodyScrollHeight: document.body.scrollHeight,
-      bodyOffsetHeight: document.body.offsetHeight,
-    });
-  }
-    
-  // Report height on load
-  window.addEventListener('load', reportHeight2);
-  // Report height on resize
-  window.addEventListener('resize', reportHeight2);
-})();`;
-
 export const PinataRewardsFlow = ({
   token,
   environment = undefined,
@@ -44,7 +19,6 @@ export const PinataRewardsFlow = ({
       }
       environment={environment}
       style={style}
-      injectedJavaScript={injectedJavaScript}
     />
   );
 };
