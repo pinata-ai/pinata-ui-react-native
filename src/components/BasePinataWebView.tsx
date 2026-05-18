@@ -14,6 +14,7 @@ interface BasePinataWebViewProps {
   onError?: (event: WebViewErrorEvent) => void;
   onClick?: () => void;
   name?: string;
+  containerStyles?: ViewStyle;
 }
 
 export const BasePinataWebView = ({
@@ -39,6 +40,16 @@ export const BasePinataWebView = ({
       />
       <link  rel="preconnect" href="${environmentUrl}" />
       <script type="module" src="${environmentUrl}"></script>
+      <style>
+        body, html {
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }      
+      </style>
     </head>
      <body>
        ${getHtml()}
@@ -83,6 +94,7 @@ export const BasePinataWebView = ({
       mixedContentMode="always"
       onMessage={handleMessage}
       onError={onError}
+      containerStyle={{ flex: 1 }}
     />
   );
 };

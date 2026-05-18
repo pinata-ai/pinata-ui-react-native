@@ -4,6 +4,7 @@ import BasePinataWebView from '../BasePinataWebView';
 export const CreditReportingFlow = ({
   token,
   environment = undefined,
+  style,
 }: PropsWithEnvironment<{ token: string }>) => {
   return (
     <BasePinataWebView
@@ -11,6 +12,7 @@ export const CreditReportingFlow = ({
                 <pinata-cr-flow usertoken="${token}"></pinata-cr-flow>
             `}
       environment={environment}
+      style={style}
     />
   );
 };

@@ -12,6 +12,7 @@ export const PinataPointsWallet = ({
   onClick,
   text,
   environment = undefined,
+  style,
 }: PropsWithEnvironment<PinataPointsWalletProps>) => {
   return (
     <BasePinataWebView
@@ -21,6 +22,7 @@ export const PinataPointsWallet = ({
                 <pinata-points-wallet usertoken="${token}" customCTAText='${text || 'See rewards'}'></pinata-points-wallet>
             `}
       environment={environment}
+      style={style}
     />
   );
 };

@@ -12,6 +12,7 @@ interface PinataIdpWidgetProps {
 export const PinataIdpWidget = ({
   token,
   environment = undefined,
+  style,
 }: PropsWithEnvironment<PinataIdpWidgetProps>) => {
   return (
     <BasePinataWebView
@@ -20,6 +21,7 @@ export const PinataIdpWidget = ({
                 <pinata-idp-widget usertoken="${token}" environment="${EMBEDED_COMPONENTS_ENVIRONMENTS_MAP[environment ?? ENVIRONMENTS.SANDBOX]}"></pinata-idp-widget>
             `}
       environment={environment}
+      style={style}
     />
   );
 };
